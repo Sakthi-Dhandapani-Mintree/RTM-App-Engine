@@ -1,11 +1,20 @@
 steps:
-- name: "gcr.io/cloud-builders/mvn"
-  args:
-  - install
+- id: 'Build fat jar'
+  name: 'gcr.io/cloud-builders/mvn'
+  args: ['package']
   dir: 'resourcetech'
-- name: "gcr.io/cloud-builders/mvn"
-  args:
-  - package
+- id: "Prepare staging directory"
+  name: 'ubuntu'
+  args: ['mkdir', 'deploy-build']
   dir: 'resourcetech'
-- name: "gcr.io/cloud-builders/gcloud"
-  args: ["app", "deploy"]
+- name: 'ubuntu'
+  args: ['cp', 'src/main/appengine/app.yaml', 'deploy-build/']
+  dir: 'resourcetech'
+- name: 'ubuntu'
+  args: ['cp', 'target/demo-0.0.1-SNAPSHOT.jar', 'deploy-build/']
+  dir: 'resourcetech'
+- id: "Deploy to AppEngine"
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', 'deploy-build/']
+  dir: 'resourcetech'
+timeout: '1600s'
