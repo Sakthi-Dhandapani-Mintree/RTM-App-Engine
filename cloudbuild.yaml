@@ -4,13 +4,13 @@ steps:
   args: ['package']
   dir: 'resourcetech'
 - id: "Prepare staging directory"
-  name:
+  name: 'ubuntu'
   args: ['mkdir', 'deploy-build']
   dir: 'resourcetech'
-- name: 
+- name: 'ubuntu'
   args: ['cp', 'src/main/appengine/app.yaml', 'deploy-build/']
   dir: 'resourcetech'
-- name: 
+- name: 'ubuntu'
   args: ['cp', '/workspace/resourcetech/target/resourcetech-appengine-0.1.0-SNAPSHOT.war', 'deploy-build/']
   dir: 'resourcetech'
 - id: "Deploy to AppEngine"
