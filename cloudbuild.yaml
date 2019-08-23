@@ -13,7 +13,7 @@ steps:
 - name: 'ubuntu'
   args: ['cp', '/workspace/resourcetech/target/resourcetech-appengine-0.1.0-SNAPSHOT.war', 'deploy-build/']
   dir: 'resourcetech'
-- id: "Deploy to AppEngine"
+- id: "Deploy to App-Engine"
   name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy', 'deploy-build/']
   dir: 'resourcetech'
